@@ -25,8 +25,8 @@ class SystemToolUpTime(Resource):
         return resp.json()
 
 
-api.add_resource(SystemToolTime, '/time')
-api.add_resource(SystemToolUpTime, '/uptime')
+api.add_resource(SystemToolTime, '/systemtoolstime')
+api.add_resource(SystemToolUpTime, '/systemtoolsuptime')
 
 
 if __name__ == '__main__':
