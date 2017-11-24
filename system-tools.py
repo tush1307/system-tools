@@ -13,7 +13,7 @@ api = Api(app)
 
 class SystemToolTime(Resource):
     def get(self):
-        url = "http://system-time:10002/time"
+        url = "http://system-time.system-time:10002/time"
         resp = requests.get(url)
         return resp.json()
 
