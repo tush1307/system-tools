@@ -13,14 +13,14 @@ api = Api(app)
 
 class SystemToolTime(Resource):
     def get(self):
-        url = "http://system-time.system-time:10002/time"
+        url = "http://system-time:10002/time"
         resp = requests.get(url)
         return resp.json()
 
 
 class SystemToolUpTime(Resource):
     def get(self):
-        url = "http://system-uptime:10004/uptime"
+        url = "http://system-uptime.system-uptime:10004/uptime"
         resp = requests.get(url)
         return resp.json()
 
