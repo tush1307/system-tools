@@ -28,7 +28,7 @@
   "ssh_username": "{{user `ssh_username`}}",
   "image_name": "{{user `image_name`}}",
   "networks": "{{user `networks`}}",
-  "source_image_name": "{{user `source_image_name`}}",
+  "source_image": "{{user `source_image_name`}}",
   "flavor": "{{user `flavor`}}",
   "insecure": "{{user `insecure`}}"
   }
