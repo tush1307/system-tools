@@ -57,7 +57,7 @@
     },
         {
       "destination": ".",
-      "source": "./tmp/vmSecurityReport.tgz",
+      "source": "/tmp/vmSecurityReport.tgz",
       "type": "file",
       "direction": "download"
     }
