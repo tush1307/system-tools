@@ -39,16 +39,38 @@
       "source": "./environment",
       "type": "file"
     },
-    {
+ {
   "type": "shell",
   "inline": [
-    "sleep 30",
+    "sleep 10",
+    "echo '{{user `image_name`}}'",
+    "sudo su -c \"echo '127.0.0.1 {{user `image_name`}}' >> /etc/hosts\"",
     "sudo mkdir -p /etc/apt",
     "yes | sudo cp /tmp/apt.conf /etc/apt/apt.conf",
-    "sudo apt-get install -y debsecan clamav lynis",
-    "sudo mkdir -p /tmp/vmSecurityReport",
-    "sudo lynis audit system -Q --report-file /tmp/vmSecurityReport/systemAudit.txt",
-    "sudo debsecan --format report | tee /tmp/vmSecurityReport/debSecanReport.txt",
+    "sudo apt-get install -y debsecan clamav-freshclam clamav lynis",
+    "sudo mkdir -p /tmp/vmSecurityReport"
+      ]
+},
+
+
+{
+  "type": "shell",
+  "inline": [
+    "sleep 10",
+    "sudo su -c \"lynis audit system -Q --report-file /tmp/vmSecurityReport/systemAudit.txt\"",
+    "sudo su -c \" debsecan --format report | tee /tmp/vmSecurityReport/debSecanReport.txt\""
+    
+  ]
+},
+
+{
+  "type": "shell",
+  "inline": [
+    "sleep 10",
+    "proxyIp=`cat /tmp/apt.conf| cut -d'/' -f3 | cut -d':' -f1 | uniq`",
+    "sudo su -c \"echo 'HTTPProxyServer' $proxyIp >> /etc/clamav/freshclam.conf\"",
+    "sudo su -c \"echo 'HTTPProxyPort 80' >> /etc/clamav/freshclam.conf\"",
+    "sudo pkill freshclam",
     "sudo freshclam",
     "sudo clamscan --exclude-dir=/sys/* -i -r / -l /tmp/vmSecurityReport/clamAv.txt",
     "cd /tmp/vmSecurityReport/ && sudo tar cvzf ../vmSecurityReport.tgz *"
@@ -56,7 +78,7 @@
 },
     
 {
-      "destination": ".",
+      "destination": "./vmSecurityReport.tgz",
       "source": "/tmp/vmSecurityReport.tgz",
       "type": "file",
       "direction": "download"
