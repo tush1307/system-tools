@@ -43,8 +43,8 @@
   "type": "shell",
   "inline": [
     "sleep 30",
-    "mkdir -p /etc/apt",
-    "yes | cp /tmp/apt.conf /etc/apt/apt.conf",
+    "sudo mkdir -p /etc/apt",
+    "yes | sudo cp /tmp/apt.conf /etc/apt/apt.conf",
     "sudo apt-get install -y debsecan clamav lynis",
     "sudo mkdir -p /tmp/vmSecurityReport",
     "sudo lynis audit system -Q --report-file /tmp/vmSecurityReport/systemAudit.txt",
