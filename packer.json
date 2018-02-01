@@ -44,10 +44,7 @@
       "inline": [
 	"sleep 30",
         "mkdir -p /etc/apt && sudo touch /etc/apt/apt.conf",
-        "cp /tmp/apt.conf /etc/apt/apt.conf",
-        "pkill apt && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y python2.7",
-	"apt-get install -y python-pip",
-        "mkdir -p /opt/dtedge/system-tools"
+        "cp /tmp/apt.conf /etc/apt/apt.conf"
       ]
     },
     {
@@ -65,14 +62,7 @@
       "execute_command": "echo '{{user `ubuntu`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
       "inline": [
         "cp /tmp/system-tools.py /opt/dtedge/system-tools/system-tools.py",
-        "cp /tmp/requirements.txt /opt/dtedge/system-tools/requirements.txt",
-	      "echo '#!/bin/bash' > /etc/rc.local",
-	      "echo 'nohup python /opt/dtedge/system-tools/system-tools.py > /var/log/system-tools.log 2>&1 &' >> /etc/rc.local",
-	      "echo 'exit 0' >> /etc/rc.local",
-	      "export http_proxy=http://165.225.106.34:80",
-	      "export https_proxy=https://165.225.106.34:80",
-        "pip install -r /opt/dtedge/system-tools/requirements.txt",
-	      "unset http_proxy https_proxy"
+        "cp /tmp/requirements.txt /opt/dtedge/system-tools/requirements.txt"
       ]
     }
   ]
