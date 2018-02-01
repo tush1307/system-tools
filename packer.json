@@ -61,8 +61,7 @@
       "type": "shell",
       "execute_command": "echo '{{user `ubuntu`}}' | {{ .Vars }} sudo -E -S sh '{{ .Path }}'",
       "inline": [
-        "cp /tmp/system-tools.py /opt/dtedge/system-tools/system-tools.py",
-        "cp /tmp/requirements.txt /opt/dtedge/system-tools/requirements.txt"
+        "pwd"
       ]
     }
   ]
